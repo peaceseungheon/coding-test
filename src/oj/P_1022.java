@@ -1,0 +1,87 @@
+package oj;
+
+import java.util.*;
+import java.io.*;
+
+public class P_1022 {
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+        StringTokenizer st =  new StringTokenizer(br.readLine());
+
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+
+        sortAsc(arr, 0, N - 1);
+        System.out.println(Arrays.toString(arr));
+        sortDesc(arr, 0, N-1);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    static void sortAsc(int[] arr, int left, int right){
+        if(left >= right){
+            return;
+        }
+
+        int tempLeft = left;
+        int tempRight = right;
+
+        int pivotIndex = left;
+        int pivot = arr[left];
+        while(left < right){
+            // pivot 오른쪽 값이 pivot보다 작은 값을 발견할 때까지 right ++
+            while (arr[right] > pivot && left < right){
+                right--;
+            }
+
+            // pivot의 왼쪽 값이 pivot보다 작거나 같다? left++
+            while (arr[left] <= pivot && left < right){
+                left++;
+            }
+
+            swap(arr, left, right);
+        }
+        swap(arr, pivotIndex, left);
+        sortAsc(arr, tempLeft, left - 1);
+        sortAsc(arr, left+1, tempRight);
+    }
+    static void swap(int[] arr, int i, int j){
+        int temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
+
+    static void sortDesc(int[] arr, int left, int right){
+        if(left >= right){
+            return;
+        }
+
+        int tempLeft = left;
+        int tempRight = right;
+
+        int pivotIndex = right;
+        int pivot = arr[right];
+        while(left < right){
+
+            // pivot의 왼쪽 값이 pivot 크거나 같다? left++
+            while (arr[left] >= pivot && left < right){
+                left++;
+            }
+
+            // pivot 오른쪽 값이 pivot보다 작다? right --
+            while (arr[right] < pivot && left < right){
+                right--;
+            }
+            swap(arr, right, left);
+        }
+        swap(arr, pivotIndex, right);
+        sortDesc(arr, tempLeft, right - 1);
+        sortDesc(arr, right+1, tempRight);
+    }
+
+}
