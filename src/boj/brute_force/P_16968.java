@@ -3,8 +3,6 @@ package boj.brute_force;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class P_16968 {
 
@@ -12,7 +10,6 @@ public class P_16968 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         String type = br.readLine();
         // 출력: 가능한 차량 번호판의 개수
         // 로직: 1. 형식(dd, dc, cc, cd)에 따라 번호판의 개수를 구한다.
